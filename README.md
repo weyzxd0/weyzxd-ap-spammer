@@ -1,1 +1,0 @@
-# weyzxd-ap-spammer

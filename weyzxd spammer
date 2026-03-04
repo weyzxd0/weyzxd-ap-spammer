@@ -1,0 +1,477 @@
+-- Weyzxd Spammer - Hızlı Versiyon
+-- Executor ile çalıştır
+
+-- Eski GUI varsa kaldır
+if game.CoreGui:FindFirstChild("WeyzxdSpammer") then
+    game.CoreGui:FindFirstChild("WeyzxdSpammer"):Destroy()
+end
+
+-- Ana ScreenGui
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "WeyzxdSpammer"
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false
+
+-- Ana Frame (Pencere)
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.3, 0, 0.15, 0)
+MainFrame.Size = UDim2.new(0, 420, 0, 500)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 12)
+MainCorner.Parent = MainFrame
+
+-- Gölge Efekti
+local Shadow = Instance.new("ImageLabel")
+Shadow.Name = "Shadow"
+Shadow.Parent = MainFrame
+Shadow.BackgroundTransparency = 1
+Shadow.Position = UDim2.new(0, -15, 0, -15)
+Shadow.Size = UDim2.new(1, 30, 1, 30)
+Shadow.ZIndex = -1
+Shadow.Image = "rbxassetid://6015897843"
+Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+Shadow.ImageTransparency = 0.5
+Shadow.ScaleType = Enum.ScaleType.Slice
+Shadow.SliceCenter = Rect.new(49, 49, 450, 450)
+
+-- Başlık Barı
+local TitleBar = Instance.new("Frame")
+TitleBar.Name = "TitleBar"
+TitleBar.Parent = MainFrame
+TitleBar.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+TitleBar.BorderSizePixel = 0
+TitleBar.Size = UDim2.new(1, 0, 0, 45)
+
+local TitleCorner = Instance.new("UICorner")
+TitleCorner.CornerRadius = UDim.new(0, 12)
+TitleCorner.Parent = TitleBar
+
+local TitleCover = Instance.new("Frame")
+TitleCover.Parent = TitleBar
+TitleCover.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+TitleCover.BorderSizePixel = 0
+TitleCover.Position = UDim2.new(0, 0, 0.5, 0)
+TitleCover.Size = UDim2.new(1, 0, 0.5, 0)
+
+-- Başlık Yazısı
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = TitleBar
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Size = UDim2.new(0.85, 0, 1, 0)
+TitleLabel.Position = UDim2.new(0.02, 0, 0, 0)
+TitleLabel.Font = Enum.Font.GothamBlack
+TitleLabel.Text = "⚡ Weyzxd Spammer"
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.TextSize = 18
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Kapatma Butonu
+local CloseButton = Instance.new("TextButton")
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = TitleBar
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+CloseButton.Position = UDim2.new(1, -40, 0, 7)
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextSize = 14
+CloseButton.BorderSizePixel = 0
+
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 8)
+CloseCorner.Parent = CloseButton
+
+-- Minimize Butonu
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Name = "MinimizeButton"
+MinimizeButton.Parent = TitleBar
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
+MinimizeButton.Position = UDim2.new(1, -75, 0, 7)
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Font = Enum.Font.GothamBold
+MinimizeButton.Text = "-"
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.TextSize = 18
+MinimizeButton.BorderSizePixel = 0
+
+local MinCorner = Instance.new("UICorner")
+MinCorner.CornerRadius = UDim.new(0, 8)
+MinCorner.Parent = MinimizeButton
+
+-- Bilgi Yazısı
+local InfoLabel = Instance.new("TextLabel")
+InfoLabel.Name = "InfoLabel"
+InfoLabel.Parent = MainFrame
+InfoLabel.BackgroundTransparency = 1
+InfoLabel.Position = UDim2.new(0, 10, 0, 50)
+InfoLabel.Size = UDim2.new(1, -20, 0, 25)
+InfoLabel.Font = Enum.Font.GothamSemibold
+InfoLabel.Text = "📋 Bir oyuncu seç ve SPAMMER'a bas!"
+InfoLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+InfoLabel.TextSize = 13
+InfoLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Spam Hızı Ayarı
+local SpeedLabel = Instance.new("TextLabel")
+SpeedLabel.Parent = MainFrame
+SpeedLabel.BackgroundTransparency = 1
+SpeedLabel.Position = UDim2.new(0, 10, 0, 75)
+SpeedLabel.Size = UDim2.new(0, 100, 0, 20)
+SpeedLabel.Font = Enum.Font.GothamSemibold
+SpeedLabel.Text = "⚡ Spam Hızı:"
+SpeedLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+SpeedLabel.TextSize = 12
+SpeedLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local SpeedInput = Instance.new("TextBox")
+SpeedInput.Parent = MainFrame
+SpeedInput.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+SpeedInput.Position = UDim2.new(0, 115, 0, 75)
+SpeedInput.Size = UDim2.new(0, 50, 0, 22)
+SpeedInput.Font = Enum.Font.GothamBold
+SpeedInput.Text = "10"
+SpeedInput.TextColor3 = Color3.fromRGB(138, 43, 226)
+SpeedInput.TextSize = 13
+SpeedInput.BorderSizePixel = 0
+SpeedInput.PlaceholderText = "10"
+
+local SpeedCorner = Instance.new("UICorner")
+SpeedCorner.CornerRadius = UDim.new(0, 6)
+SpeedCorner.Parent = SpeedInput
+
+local SpeedNote = Instance.new("TextLabel")
+SpeedNote.Parent = MainFrame
+SpeedNote.BackgroundTransparency = 1
+SpeedNote.Position = UDim2.new(0, 170, 0, 75)
+SpeedNote.Size = UDim2.new(0, 100, 0, 20)
+SpeedNote.Font = Enum.Font.Gotham
+SpeedNote.Text = "(tekrar sayısı)"
+SpeedNote.TextColor3 = Color3.fromRGB(120, 120, 120)
+SpeedNote.TextSize = 11
+SpeedNote.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Durdur Butonu
+local StopButton = Instance.new("TextButton")
+StopButton.Name = "StopButton"
+StopButton.Parent = MainFrame
+StopButton.BackgroundColor3 = Color3.fromRGB(200, 30, 30)
+StopButton.Position = UDim2.new(0.65, 0, 0, 73)
+StopButton.Size = UDim2.new(0.32, 0, 0, 25)
+StopButton.Font = Enum.Font.GothamBold
+StopButton.Text = "⛔ DURDUR"
+StopButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+StopButton.TextSize = 12
+StopButton.BorderSizePixel = 0
+StopButton.Visible = false
+
+local StopCorner = Instance.new("UICorner")
+StopCorner.CornerRadius = UDim.new(0, 6)
+StopCorner.Parent = StopButton
+
+-- Scroll Frame (Oyuncu Listesi)
+local ScrollFrame = Instance.new("ScrollingFrame")
+ScrollFrame.Name = "PlayerList"
+ScrollFrame.Parent = MainFrame
+ScrollFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 28)
+ScrollFrame.BorderSizePixel = 0
+ScrollFrame.Position = UDim2.new(0, 10, 0, 105)
+ScrollFrame.Size = UDim2.new(1, -20, 1, -115)
+ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollFrame.ScrollBarThickness = 6
+ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(138, 43, 226)
+ScrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+
+local ScrollCorner = Instance.new("UICorner")
+ScrollCorner.CornerRadius = UDim.new(0, 10)
+ScrollCorner.Parent = ScrollFrame
+
+local ListLayout = Instance.new("UIListLayout")
+ListLayout.Parent = ScrollFrame
+ListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+ListLayout.Padding = UDim.new(0, 5)
+
+local ListPadding = Instance.new("UIPadding")
+ListPadding.Parent = ScrollFrame
+ListPadding.PaddingTop = UDim.new(0, 5)
+ListPadding.PaddingLeft = UDim.new(0, 5)
+ListPadding.PaddingRight = UDim.new(0, 5)
+
+-- Değişkenler
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+local spamming = false
+
+-- Chat'e mesaj gönderme fonksiyonu (HIZLI)
+local function sendChat(message)
+    local success = pcall(function()
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+    end)
+    
+    if not success then
+        pcall(function()
+            local TextChatService = game:GetService("TextChatService")
+            local channels = TextChatService:FindFirstChild("TextChannels")
+            if channels then
+                local rbxGeneral = channels:FindFirstChild("RBXGeneral")
+                if rbxGeneral then
+                    rbxGeneral:SendAsync(message)
+                end
+            end
+        end)
+    end
+end
+
+-- HIZLI Spammer fonksiyonu
+local function startSpam(playerName)
+    spamming = true
+    StopButton.Visible = true
+    
+    local commands = {
+        ";rocket " .. playerName,
+        ";balloon " .. playerName,
+        ";jumpscare " .. playerName,
+        ";tiny " .. playerName
+    }
+    
+    local repeatCount = tonumber(SpeedInput.Text) or 10
+    
+    spawn(function()
+        for i = 1, repeatCount do
+            if not spamming then break end
+            for _, cmd in ipairs(commands) do
+                if not spamming then break end
+                sendChat(cmd)
+                wait(0.15) -- ÇOK HIZLI - 0.15 saniye bekleme
+            end
+            if i < repeatCount then
+                wait(0.05) -- Turlar arası neredeyse bekleme yok
+            end
+        end
+        spamming = false
+        StopButton.Visible = false
+        InfoLabel.Text = "✅ Spam tamamlandı! Yeni hedef seç."
+    end)
+end
+
+-- Oyuncu kartı oluşturma
+local function createPlayerCard(player)
+    local Card = Instance.new("Frame")
+    Card.Name = "Card_" .. player.Name
+    Card.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+    Card.BorderSizePixel = 0
+    Card.Size = UDim2.new(1, -10, 0, 90)
+    Card.Parent = ScrollFrame
+
+    local CardCorner = Instance.new("UICorner")
+    CardCorner.CornerRadius = UDim.new(0, 10)
+    CardCorner.Parent = Card
+
+    Card.MouseEnter:Connect(function()
+        TweenService:Create(Card, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(45, 45, 65)}):Play()
+    end)
+    Card.MouseLeave:Connect(function()
+        TweenService:Create(Card, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(35, 35, 50)}):Play()
+    end)
+
+    -- Profil Resmi
+    local Avatar = Instance.new("ImageLabel")
+    Avatar.Name = "Avatar"
+    Avatar.Parent = Card
+    Avatar.BackgroundColor3 = Color3.fromRGB(60, 60, 80)
+    Avatar.Position = UDim2.new(0, 10, 0, 10)
+    Avatar.Size = UDim2.new(0, 40, 0, 40)
+    Avatar.Image = ""
+
+    local AvatarCorner = Instance.new("UICorner")
+    AvatarCorner.CornerRadius = UDim.new(1, 0)
+    AvatarCorner.Parent = Avatar
+
+    spawn(function()
+        pcall(function()
+            local content, isReady = Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size48x48)
+            Avatar.Image = content
+        end)
+    end)
+
+    -- Display Name
+    local NameLabel = Instance.new("TextLabel")
+    NameLabel.Parent = Card
+    NameLabel.BackgroundTransparency = 1
+    NameLabel.Position = UDim2.new(0, 60, 0, 8)
+    NameLabel.Size = UDim2.new(1, -70, 0, 20)
+    NameLabel.Font = Enum.Font.GothamBold
+    NameLabel.Text = player.DisplayName
+    NameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    NameLabel.TextSize = 15
+    NameLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+    -- Username
+    local UsernameLabel = Instance.new("TextLabel")
+    UsernameLabel.Parent = Card
+    UsernameLabel.BackgroundTransparency = 1
+    UsernameLabel.Position = UDim2.new(0, 60, 0, 28)
+    UsernameLabel.Size = UDim2.new(1, -70, 0, 16)
+    UsernameLabel.Font = Enum.Font.Gotham
+    UsernameLabel.Text = "@" .. player.Name
+    UsernameLabel.TextColor3 = Color3.fromRGB(130, 130, 160)
+    UsernameLabel.TextSize = 11
+    UsernameLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+    -- Sen etiketi
+    if player == LocalPlayer then
+        local YouTag = Instance.new("TextLabel")
+        YouTag.Parent = Card
+        YouTag.BackgroundColor3 = Color3.fromRGB(0, 180, 0)
+        YouTag.Position = UDim2.new(1, -55, 0, 10)
+        YouTag.Size = UDim2.new(0, 45, 0, 18)
+        YouTag.Font = Enum.Font.GothamBold
+        YouTag.Text = "SEN"
+        YouTag.TextColor3 = Color3.fromRGB(255, 255, 255)
+        YouTag.TextSize = 10
+        YouTag.BorderSizePixel = 0
+
+        local YouCorner = Instance.new("UICorner")
+        YouCorner.CornerRadius = UDim.new(0, 6)
+        YouCorner.Parent = YouTag
+    end
+
+    -- ═══════════════════════════════
+    -- 💀 SPAMMER BUTONU
+    -- ═══════════════════════════════
+    local SpammerButton = Instance.new("TextButton")
+    SpammerButton.Name = "SpammerButton"
+    SpammerButton.Parent = Card
+    SpammerButton.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+    SpammerButton.Position = UDim2.new(0, 10, 0, 57)
+    SpammerButton.Size = UDim2.new(1, -20, 0, 28)
+    SpammerButton.Font = Enum.Font.GothamBlack
+    SpammerButton.Text = "💀 SPAMMER"
+    SpammerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    SpammerButton.TextSize = 13
+    SpammerButton.BorderSizePixel = 0
+    SpammerButton.AutoButtonColor = true
+
+    local SpamCorner = Instance.new("UICorner")
+    SpamCorner.CornerRadius = UDim.new(0, 8)
+    SpamCorner.Parent = SpammerButton
+
+    local Gradient = Instance.new("UIGradient")
+    Gradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(138, 43, 226)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(180, 60, 255)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(138, 43, 226))
+    }
+    Gradient.Parent = SpammerButton
+
+    SpammerButton.MouseEnter:Connect(function()
+        TweenService:Create(SpammerButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(170, 60, 255)}):Play()
+    end)
+    SpammerButton.MouseLeave:Connect(function()
+        TweenService:Create(SpammerButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(138, 43, 226)}):Play()
+    end)
+
+    SpammerButton.MouseButton1Click:Connect(function()
+        if spamming then
+            spamming = false
+            wait(0.3)
+        end
+
+        SpammerButton.Text = "🔥 SPAMLANIYOR..."
+        SpammerButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+        InfoLabel.Text = "🎯 Hedef: " .. player.DisplayName .. " (@" .. player.Name .. ")"
+
+        startSpam(player.Name)
+
+        spawn(function()
+            while spamming do wait(0.1) end
+            SpammerButton.Text = "💀 SPAMMER"
+            SpammerButton.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+        end)
+    end)
+
+    return Card
+end
+
+-- Oyuncu listesini yenile
+local function refreshPlayerList()
+    for _, child in ipairs(ScrollFrame:GetChildren()) do
+        if child:IsA("Frame") then
+            child:Destroy()
+        end
+    end
+    for _, player in ipairs(Players:GetPlayers()) do
+        createPlayerCard(player)
+    end
+end
+
+-- İlk yükleme
+refreshPlayerList()
+
+-- Oyuncu giriş/çık��ş
+Players.PlayerAdded:Connect(function()
+    wait(0.5)
+    refreshPlayerList()
+end)
+
+Players.PlayerRemoving:Connect(function()
+    wait(0.5)
+    refreshPlayerList()
+end)
+
+-- Kapatma
+CloseButton.MouseButton1Click:Connect(function()
+    spamming = false
+    ScreenGui:Destroy()
+end)
+
+-- Minimize
+local minimized = false
+MinimizeButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    if minimized then
+        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {Size = UDim2.new(0, 420, 0, 45)}):Play()
+        MinimizeButton.Text = "+"
+        ScrollFrame.Visible = false
+        InfoLabel.Visible = false
+        SpeedLabel.Visible = false
+        SpeedInput.Visible = false
+        SpeedNote.Visible = false
+        StopButton.Visible = false
+    else
+        ScrollFrame.Visible = true
+        InfoLabel.Visible = true
+        SpeedLabel.Visible = true
+        SpeedInput.Visible = true
+        SpeedNote.Visible = true
+        TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {Size = UDim2.new(0, 420, 0, 500)}):Play()
+        MinimizeButton.Text = "-"
+    end
+end)
+
+-- Durdur
+StopButton.MouseButton1Click:Connect(function()
+    spamming = false
+    StopButton.Visible = false
+    InfoLabel.Text = "📋 Spam durduruldu! Yeni hedef seç."
+end)
+
+-- Hover efektleri
+CloseButton.MouseEnter:Connect(function()
+    TweenService:Create(CloseButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(255, 80, 80)}):Play()
+end)
+CloseButton.MouseLeave:Connect(function()
+    TweenService:Create(CloseButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(255, 50, 50)}):Play()
+end)
+
+print("⚡ Made By Weyzxd")
